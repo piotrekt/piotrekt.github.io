@@ -8,7 +8,7 @@ body {
     }
     
     .bgimg {
-        background-image: url("https://piotrekt.github.io/covid19-polska/tarnowski_info/img/bg.jpg");
+        background-image: url("https://piotrekt.github.io/tarnowski_info/img/bg.jpg");
         height: 100%;
         opacity: 0.6;
         background-position: center;
