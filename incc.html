@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista zależna: Poziom napięcia → Rodzaj pracy</title>
+</head>
+<body>
+  <h2>Wybierz poziom napięcia i rodzaj pracy</h2>
+
+  <label for="poziom">Poziom napięcia:</label>
+  <select id="poziom" onchange="aktualizujRodzaje()">
+    <option value="">-- wybierz --</option>
+  </select>
+
+  <br><br>
+
+  <label for="rodzaj">Rodzaj pracy:</label>
+  <select id="rodzaj">
+    <option value="">-- wybierz poziom --</option>
+  </select>
+
+  <script>
+    // Dane z Excela: Poziom → Rodzaje
+    const dane = {
+      "Najwyższe napięcie NN": ["Pomiary", "Przegląd", "Naprawa"],
+      "Średnie napięcie SN": ["Pomiary", "Przegląd"],
+      "Wysokie napięcie WN": ["Pomiary", "Naprawa"],
+      "Niskie napięcie nN": ["Konserwacja", "Modernizacja"]
+    };
+
+    // Inicjalizacja listy poziomów napięcia
+    const selectPoziom = document.getElementById("poziom");
+    for (const poziom in dane) {
+      const option = document.createElement("option");
+      option.value = poziom;
+      option.textContent = poziom;
+      selectPoziom.appendChild(option);
+    }
+
+    // Funkcja do aktualizacji listy rodzajów
+    function aktualizujRodzaje() {
+      const wybranyPoziom = selectPoziom.value;
+      const selectRodzaj = document.getElementById("rodzaj");
+
+      // Wyczyść poprzednie opcje
+      selectRodzaj.innerHTML = "";
+
+      if (!wybranyPoziom || !dane[wybranyPoziom]) {
+        const option = document.createElement("option");
+        option.textContent = "-- wybierz poziom --";
+        selectRodzaj.appendChild(option);
+        return;
+      }
+
+      // Dodaj nowe opcje
+      dane[wybranyPoziom].forEach(rodzaj => {
+        const option = document.createElement("option");
+        option.value = rodzaj;
+        option.textContent = rodzaj;
+        selectRodzaj.appendChild(option);
+      });
+    }
+  </script>
+</body>
+</html>
